@@ -1,7 +1,5 @@
 -- plugin spec: https://lazy.folke.io/spec
 
--- fzf
--- multicursor for vscode
 return {
 	-- mason is an lsp/coding related manager
 	{

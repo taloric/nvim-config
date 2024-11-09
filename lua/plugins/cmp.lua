@@ -125,11 +125,12 @@ return {
 	-- which key for key mapping looking
 	{
 		"folke/which-key.nvim",
-		opts = {
-			spec = {
-				{ "<BS>", desc = "Decrement Selection", mode = "x" },
-				{ "<c-space>", desc = "Increment Selection", mode = { "x", "n" } },
-			},
-		},
+		lazy = false,
+		-- opts = {
+		-- 	spec = {
+		-- 		{ "<BS>", desc = "Decrement Selection", mode = "x" },
+		-- 		{ "<c-space>", desc = "Increment Selection", mode = { "x", "n" } },
+		-- 	},
+		-- },
 	},
 }

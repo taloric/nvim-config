@@ -1,7 +1,11 @@
+-- Deprecated
+-- NOTE: mapping is NOT require by any module, it's bean replaced by keys.lua
+-- just keep it in case I need it some days
+
 local map = vim.keymap.set
 
 -- neo-tree.nvim: view left file explorer tree
-map("n", "<C-n>", function()
+map("n", "<leader>n", function()
 	require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
 end)
 map("n", "<leader>be", function()
@@ -27,7 +31,7 @@ map("n", "<Tab>", "<cmd> BufferLineCycleNext <CR>")
 map("n", "<C-q>", "<cmd> bd <CR>")
 
 -- conform.nvim: format files
-map("n", "<leader>f", function()
+map("n", "<leader>fm", function()
 	require("conform").format({ async = true })
 end)
 

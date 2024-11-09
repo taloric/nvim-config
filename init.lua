@@ -16,5 +16,6 @@ else
 	-- init plugin & conf by lazy
 	-- NOTE: setup("plugins") cause auto-load lua/plugins/*.lua files
 	require("lazy").setup("plugins", lazy_init:lazy_conf())
+	require("keys")
 	vim.cmd.colorscheme("tokyonight-moon")
 end
