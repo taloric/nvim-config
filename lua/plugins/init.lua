@@ -3,12 +3,13 @@
 return {
 	-- mason is an lsp/coding related manager
 	{
-		event = "VeryLazy",
 		"williamboman/mason.nvim",
+		event = "VeryLazy",
+		cond = not vim.g.vscode,
 		build = ":MasonUpdate",
 		config = function()
 			require("mason").setup()
-			-- require("mason-lspconfig").setup()
+			require("mason-lspconfig").setup()
 		end,
 	},
 }

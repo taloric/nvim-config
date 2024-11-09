@@ -40,5 +40,5 @@ else
 		end,
 	})
 	-- colorscheme for neovim
-	vim.cmd.colorscheme("tokyonight-moon")
+	vim.cmd.colorscheme("vscode")
 end

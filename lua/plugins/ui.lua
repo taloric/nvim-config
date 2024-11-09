@@ -3,7 +3,7 @@
 return {
 	-- theme and colorscheme
 	{
-		"folke/tokyonight.nvim",
+		"Mofiqul/vscode.nvim",
 		cond = not vim.g.vscode,
 		lazy = true,
 	},
