@@ -2,6 +2,7 @@
 return {
 	{
 		"hrsh7th/nvim-cmp",
+		cond = not vim.g.vscode,
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"hrsh7th/cmp-nvim-lsp",
@@ -126,6 +127,7 @@ return {
 	{
 		"folke/which-key.nvim",
 		lazy = false,
+		-- cond = not vim.g.vscode,
 		-- opts = {
 		-- 	spec = {
 		-- 		{ "<BS>", desc = "Decrement Selection", mode = "x" },

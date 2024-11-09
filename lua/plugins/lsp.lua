@@ -1,7 +1,8 @@
 return {
 	{
-		event = "VeryLazy",
 		"neovim/nvim-lspconfig",
+		cond = not vim.g.vscode,
+		event = "VeryLazy",
 		dependencies = { "williamboman/mason-lspconfig.nvim" },
 		config = function()
 			-- Use LspAttach autocommand to only map the following keys
@@ -61,6 +62,7 @@ return {
 	-- use conform instead of null-ls
 	{
 		"stevearc/conform.nvim",
+		cond = not vim.g.vscode,
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		opts = {
@@ -92,6 +94,7 @@ return {
 	-- treesitter use for code syntax highlight
 	{
 		"nvim-treesitter/nvim-treesitter",
+		cond = not vim.g.vscode,
 		version = false, -- last release is way too old and doesn't work on Windows
 		build = ":TSUpdate",
 		event = "VeryLazy",

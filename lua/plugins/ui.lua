@@ -4,6 +4,7 @@ return {
 	-- theme and colorscheme
 	{
 		"folke/tokyonight.nvim",
+		cond = not vim.g.vscode,
 		lazy = true,
 	},
 	-- left tree in ui
@@ -11,6 +12,7 @@ return {
 	-- but delete keys and moved to mappings.lua
 	{
 		"nvim-neo-tree/neo-tree.nvim",
+		cond = not vim.g.vscode,
 		branch = "v3.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -89,6 +91,7 @@ return {
 	-- noticed: window is different from 'tab', which means :tabnew & :sp/:vsp is not the same things
 	{
 		"akinsho/bufferline.nvim",
+		cond = not vim.g.vscode,
 		dependencies = "nvim-tree/nvim-web-devicons",
 		event = "VeryLazy",
 		opts = {

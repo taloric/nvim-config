@@ -1,16 +1,18 @@
--- Deprecated
--- NOTE: mapping is NOT require by any module, it's bean replaced by keys.lua
--- just keep it in case I need it some days
+-- DEPRECATED
+-- mappings are deprecated due to it's design to be loaded before plugins
+-- but some keys require plugins, so use 'keys.lua' instead of it
+-- keep it just incase I will need mapping some days
 
 local map = vim.keymap.set
 
 -- neo-tree.nvim: view left file explorer tree
 map("n", "<leader>n", function()
 	require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
-end)
+end, { desc = "Switch Neo Tree" })
+
 map("n", "<leader>be", function()
 	require("neo-tree.command").execute({ source = "buffers", toggle = true })
-end)
+end, { desc = "Switch Buffers" })
 
 -- telescope.nvim
 map("n", "<leader>ff", "<cmd> Telescope find_files <CR>")
@@ -21,14 +23,14 @@ map("n", "<leader>fo", "<cmd> Telescope oldfiles <CR>")
 map("n", "<leader>gs", "<CMD> Telescope git_status <CR>")
 
 -- bufferline.nvim mappings
-map("n", "<leader>bp", "<cmd> BufferLineTogglePin <CR>")
+map("n", "<leader>bp", "<cmd> BufferLineTogglePin <CR>", { desc = "Pin Tab" })
 map("n", "<leader>bP", "<cmd> BufferLineGroupClose ungrouped <CR>")
 map("n", "<leader>bo", "<cmd> BufferLineCloseOthers <CR>")
 map("n", "<leader>br", "<cmd> BufferLineCloseRight <CR>")
 map("n", "<leader>bl", "<cmd> BufferLineCloseLeft <CR>")
 map("n", "<S-Tab>", "<cmd> BufferLineCyclePrev <CR>")
 map("n", "<Tab>", "<cmd> BufferLineCycleNext <CR>")
-map("n", "<C-q>", "<cmd> bd <CR>")
+map("n", "<C-q>", "<cmd> bd <CR>", { desc = "Close Tab" })
 
 -- conform.nvim: format files
 map("n", "<leader>fm", function()

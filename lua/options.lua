@@ -4,7 +4,7 @@ vim.g.maplocalleader = "\\"
 
 -- NOTE: use keys.lua instead of its
 -- cause keys.lua can add 'desc' for each key
--- require("mapping")
+require("mapping")
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -19,5 +19,3 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 		})
 	end,
 })
--- NOTE: VM stands for vim-multi-curcor, it can only set key mapping in global like the vim key settings
-vim.keymap.set("n", "<C-x>", "<Plug>(VM-Find-Under)")
