@@ -69,8 +69,7 @@ return {
 			-- Define your formatters
 			formatters_by_ft = {
 				lua = { "stylua" },
-				-- 20241108 NOTE: no need install other language formatter here
-				-- python = { "isort", "black" },
+				-- python = { "yapf" },
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
 			},
 			-- Set default options
@@ -134,10 +133,12 @@ return {
 				"markdown",
 				"markdown_inline",
 				"printf",
-				-- "python",
+				"python",
+				"go",
+				"gomod",
 				"query",
 				"regex",
-				"toml",
+				-- "toml",
 				-- "tsx",
 				-- "typescript",
 				"vim",

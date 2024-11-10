@@ -17,7 +17,7 @@ if vim.g.vscode then
 	-- map({ "n" }, "mn", cursors.next_cursor, { desc = "Goto next cursor" })
 	wk.add({
 		{
-			mode = { "n", "x" },
+			mode = { "n", "x", "v" },
 			{ "mc", cursors.create_cursor, { expr = true, desc = "Create cursor" } },
 			-- operators like I/A, it worked after multicursor select anything
 			{ "mi", cursors.start_left, { desc = "Start cursors on the left" } },
@@ -41,6 +41,9 @@ if vim.g.vscode then
 		},
 	})
 else
+	local neo_tree_command = require("neo-tree.command")
+	local conform = require("conform")
+	local persistence = require("persistence")
 	wk.add({
 		{
 			mode = { "n", "v" },
@@ -48,20 +51,20 @@ else
 			{
 				"<leader>n",
 				function()
-					require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
+					neo_tree_command.execute({ toggle = true, dir = vim.uv.cwd() })
 				end,
 				desc = "Switch Neo Tree",
 			},
 			{
 				"<leader>be",
 				function()
-					require("neo-tree.command").execute({ source = "buffers", toggle = true })
+					neo_tree_command.execute({ source = "buffers", toggle = true })
 				end,
 				desc = "Switch Buffers",
 			},
 
 			-- telescope.nvim
-			{ "<leader>ff", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
+			{ "<C-p>", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
 			-- NOTE: should install https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation
 			{ "<leader>fw", "<cmd> Telescope live_grep <CR>", desc = "Grep Word" },
 			{ "<leader>rs", "<cmd> Telescope resume <CR>", desc = "Resume Search" },
@@ -75,13 +78,13 @@ else
 			{ "<leader>bl", "<cmd> BufferLineCloseLeft <CR>", desc = "Close Left" },
 			{ "<S-Tab>", "<cmd> BufferLineCyclePrev <CR>", desc = "Tab Prev" },
 			{ "<Tab>", "<cmd> BufferLineCycleNext <CR>", desc = "Tab Next" },
-			{ "<C-q>", "<cmd> bd <CR>", desc = "Tab Close" },
+			{ "<C-w>q", "<cmd> bd <CR>", desc = "Tab Close" },
 
 			-- conform.nvim: format files
 			{
 				"<leader>fm",
 				function()
-					require("conform").format({ async = true })
+					conform.format({ async = true })
 				end,
 				desc = "Format",
 			},
@@ -90,7 +93,7 @@ else
 			{
 				"<leader>qs",
 				function()
-					require("persistence").load()
+					persistence.load()
 				end,
 				desc = "Quick Session",
 			},
@@ -98,7 +101,7 @@ else
 			{
 				"<leader>sl",
 				function()
-					require("persistence").select()
+					persistence.select()
 				end,
 				desc = "Session Select",
 			},
@@ -106,15 +109,14 @@ else
 			{
 				"<leader>ql",
 				function()
-					require("persistence").load({ last = true })
+					persistence.load({ last = true })
 				end,
 				desc = "Quick Last Session",
 			},
-			-- stop
 			{
 				"<leader>ss",
 				function()
-					require("persistence").stop()
+					persistence.stop()
 				end,
 				desc = "Stop Record Session",
 			},

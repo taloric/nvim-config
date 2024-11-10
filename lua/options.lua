@@ -18,3 +18,11 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 		})
 	end,
 })
+
+local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
+vim.api.nvim_create_user_command("MasonRestore", function()
+	vim.cmd("MasonInstall lua-language-server stylua")
+	if not is_windows then
+		vim.cmd("MasonInstall gopls pyright gofumpt goimports")
+	end
+end, {})
