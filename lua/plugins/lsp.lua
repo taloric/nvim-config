@@ -41,22 +41,10 @@ return {
 			})
 
 			-- Set up lspconfig.
-			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			require("lspconfig").lua_ls.setup({
-				-- capabilities = capabilities,
-				settings = {
-					Lua = {
-						diagnostics = {
-							-- Get the language server to recognize the `vim` global
-							globals = { "vim", "hs" },
-						},
-						-- Do not send telemetry data containing a randomized but unique identifier
-						telemetry = {
-							enable = false,
-						},
-					},
-				},
-			})
+			require("lspconfig").lua_ls.setup(require("plugins.lsp_custom.lua_ls"))
+
+			-- setup golang lsp
+			require("lspconfig").gopls.setup(require("plugins.lsp_custom.golang"))
 		end,
 	},
 	-- use conform instead of null-ls
@@ -180,5 +168,31 @@ return {
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
 		end,
+	},
+	{
+		"ray-x/go.nvim",
+		dependencies = { "ray-x/guihua.lua" },
+		cond = not vim.g.vscode and not vim.loop.os_uname().sysname == "Windows_NT",
+		ft = { "go", "gomod", "gosum" },
+		-- build = ":GoInstallBinaries",
+		config = {
+			-- By default, we've turned off these options to prevent clashes with our gopls config
+			icons = false,
+			diagnostic = false,
+			lsp_cfg = false,
+			lsp_gofumpt = false,
+			lsp_keymaps = false,
+			lsp_codelens = false,
+			lsp_document_formatting = false,
+			lsp_inlay_hints = { enable = false },
+			-- DAP-related settings are also turned off here for the same reason
+			dap_debug = false,
+			dap_debug_keymap = false,
+			textobjects = false,
+			-- Miscellaneous options to seamlessly integrate with other plugins
+			trouble = true,
+			luasnip = false,
+			run_in_floaterm = false,
+		},
 	},
 }
