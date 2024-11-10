@@ -8,6 +8,8 @@
   "conform.nvim": { "branch": "master", "commit": "e3263eabbfc1bdbc5b6a60ba8431b64e8dca0a79" },
   "go.nvim": { "branch": "master", "commit": "2153f9ee6178dfd625b1a874eab6399fd0a2d984" },
   "guihua.lua": { "branch": "master", "commit": "d783191eaa75215beae0c80319fcce5e6b3beeda" },
+  "jieba-lua": { "branch": "master", "commit": "20e0b9e0eeb2ce92819e1335f6e2357d87ee78ca" },
+  "jieba.nvim": { "branch": "master", "commit": "9cf61bddbc9694948fa62157cc97b57e3795239e" },
   "lazy.nvim": { "branch": "main", "commit": "60cf258a9ae7fffe04bb31141141a91845158dcc" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "4d0e5b49363cac187326998b96aa6a2884e0e89b" },
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },

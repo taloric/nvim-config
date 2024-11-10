@@ -6,4 +6,9 @@ return {
 		event = "VeryLazy",
 		cond = not not vim.g.vscode,
 	},
+	{
+		"noearc/jieba.nvim",
+		event = "VeryLazy",
+		dependencies = { "noearc/jieba-lua" },
+	},
 }

@@ -123,3 +123,30 @@ else
 		},
 	})
 end
+
+-- universal for all
+local jieba = require("jieba_nvim")
+wk.add({
+	mode = { "n", "v", "x" },
+	{
+		"ce",
+		function()
+			jieba.change_w()
+		end,
+		{ noremap = false, silent = true },
+	},
+	{
+		"de",
+		function()
+			jieba.delete_w()
+		end,
+		{ noremap = false, silent = true },
+	},
+	{
+		"vw",
+		function()
+			jieba.select_w()
+		end,
+		{ noremap = false, silent = true },
+	},
+})
