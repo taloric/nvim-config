@@ -49,7 +49,7 @@ else
 			mode = { "n", "v" },
 			-- neo-tree.nvim: view left file explorer tree
 			{
-				"<leader>n",
+				"<C-n>",
 				function()
 					neo_tree_command.execute({ toggle = true, dir = vim.uv.cwd() })
 				end,

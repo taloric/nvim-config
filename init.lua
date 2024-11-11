@@ -16,6 +16,9 @@ if vim.g.vscode then
 else
 	-- extension for neovim
 	vim.o.clipboard = "unnamedplus"
+	vim.o.cursorline = true
+	vim.api.nvim_set_hl(0, "IndentLine", { link = "Comment" })
+
 	-- smart line number
 	-- when in I mode, show abosolute line number
 	-- when in N+V mode, show relative number

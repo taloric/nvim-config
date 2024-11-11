@@ -106,8 +106,27 @@ return {
 				},
 			},
 		},
-		config = function(_, opts)
-			require("bufferline").setup(opts)
-		end,
+		config = true,
+	},
+	-- indent
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		cond = not vim.g.vscode,
+		event = { "BufReadPre", "BufNewFile" },
+		main = "ibl",
+		config = true,
+		opts = {
+			indent = { char = "│" },
+			scope = { char = "│", highlight = "Comment" },
+		},
+	},
+	-- for vim status line display
+	{
+		"echasnovski/mini.statusline",
+		cond = not vim.g.vscode,
+		opts = {
+			set_vim_settings = false,
+		},
+		config = true,
 	},
 }

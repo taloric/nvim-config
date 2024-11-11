@@ -5,9 +5,28 @@ vim.g.maplocalleader = "\\"
 -- DEPRECATED
 -- require("mapping")
 
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.fileformat = "unix"
+local o = vim.o
+o.ignorecase = true
+o.smartcase = true
+o.fileformat = "unix"
+
+o.laststatus = 3 -- global statusline
+o.showmode = false
+
+-- Indenting
+o.expandtab = true
+o.shiftwidth = 2
+o.smartindent = true
+o.tabstop = 2
+o.softtabstop = 2
+
+vim.opt.fillchars = { eob = " " }
+
+o.signcolumn = "yes"
+o.splitbelow = true
+o.splitright = true
+o.termguicolors = true
+o.undofile = true
 
 -- highlight yank
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {

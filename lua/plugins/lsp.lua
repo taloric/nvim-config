@@ -172,10 +172,10 @@ return {
 	{
 		"ray-x/go.nvim",
 		dependencies = { "ray-x/guihua.lua" },
-		cond = not vim.g.vscode and not vim.loop.os_uname().sysname == "Windows_NT",
+		cond = not vim.g.vscode and vim.loop.os_uname().sysname ~= "Windows_NT",
 		ft = { "go", "gomod", "gosum" },
 		-- build = ":GoInstallBinaries",
-		config = {
+		opts = {
 			-- By default, we've turned off these options to prevent clashes with our gopls config
 			icons = false,
 			diagnostic = false,

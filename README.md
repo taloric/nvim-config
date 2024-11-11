@@ -18,6 +18,8 @@ code formatter: [conform](https://github.com/stevearc/conform.nvim)
 
 code syntax tree analysis: [treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 
+golang supported: [go.nvim](https://github.com/ray-x/go.nvim)
+
 ### Completion
 
 input completion: [nvim-cmp](http://github.com/hrsh7th/nvim-cmp)
@@ -28,6 +30,8 @@ session persistence: [persistence](https://github.com/folke/persistence.nvim)
 
 no need now but it seems useful when using tmux: integrated with terminals: [Navigator](https://github.com/numToStr/Navigator.nvim)
 
+copy & paste supported when use ssh connected to vms: [smartyank](https://github.com/ibhagwan/smartyank.nvim)
+
 ### UI
 
 windows switch & buffer view: [bufferline](https://github.com/akinsho/bufferline.nvim)
@@ -35,6 +39,10 @@ windows switch & buffer view: [bufferline](https://github.com/akinsho/bufferline
 vscode like theme: [vscode](https://github.com/Mofiqul/vscode.nvim)
 
 file explorer: [neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)
+
+status line: [mini statusline](https://github.com/echasnovski/mini.statusline)
+
+code indent line: [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
 
 ### File Searcher
 
@@ -44,7 +52,11 @@ file search & keyword grep: [telescope](https://github.com/nvim-telescope/telesc
 
 view key mappings: [which-key](https://github.com/folke/which-key.nvim)
 
-### VsCode Adapt
+### VsCode Supported
 
 vscode multi cursor supported(highly recommend): [vscode-multi-cursor](https://github.com/vscode-neovim/vscode-multi-cursor.nvim)
+
+### Chinese Supported
+
+supported words split and jump by keys like 'b/w/e': [jieba.nvim](https://github.com/noearc/jieba.nvim)
 
