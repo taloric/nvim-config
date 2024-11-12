@@ -94,7 +94,6 @@ return {
 				}),
 			})
 
-			-- 20241108 NOTE: use vscode/git instead of it
 			-- Set configuration for specific filetype.
 			-- cmp.setup.filetype("gitcommit", {
 			-- 	sources = cmp.config.sources({
@@ -127,12 +126,5 @@ return {
 	{
 		"folke/which-key.nvim",
 		lazy = false,
-		-- cond = not vim.g.vscode,
-		-- opts = {
-		-- 	spec = {
-		-- 		{ "<BS>", desc = "Decrement Selection", mode = "x" },
-		-- 		{ "<c-space>", desc = "Increment Selection", mode = { "x", "n" } },
-		-- 	},
-		-- },
 	},
 }

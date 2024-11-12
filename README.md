@@ -26,9 +26,7 @@ input completion: [nvim-cmp](http://github.com/hrsh7th/nvim-cmp)
 
 ### Session
 
-session persistence: [persistence](https://github.com/folke/persistence.nvim)
-
-no need now but it seems useful when using tmux: integrated with terminals: [Navigator](https://github.com/numToStr/Navigator.nvim)
+session persistence: [persisted.nvim](https://github.com/olimorris/persisted.nvim)
 
 copy & paste supported when use ssh connected to vms: [smartyank](https://github.com/ibhagwan/smartyank.nvim)
 
@@ -42,7 +40,9 @@ file explorer: [neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)
 
 status line: [mini statusline](https://github.com/echasnovski/mini.statusline)
 
-code indent line: [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
+code indent: [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
+
+code context view: [nvim-treesitter-context](https://github.com/nvim-treesitter/nvim-treesitter-context)
 
 ### File Searcher
 
@@ -55,8 +55,4 @@ view key mappings: [which-key](https://github.com/folke/which-key.nvim)
 ### VsCode Supported
 
 vscode multi cursor supported(highly recommend): [vscode-multi-cursor](https://github.com/vscode-neovim/vscode-multi-cursor.nvim)
-
-### Chinese Supported
-
-supported words split and jump by keys like 'b/w/e': [jieba.nvim](https://github.com/noearc/jieba.nvim)
 

@@ -1,16 +1,10 @@
--- operator for multicursors in vscode
--- neovim can use vim-visual-multi also
 return {
+	-- operator for multicursors in vscode
+	-- neovim can use vim-visual-multi
 	{
 		"vscode-neovim/vscode-multi-cursor.nvim",
 		event = "VeryLazy",
 		cond = not not vim.g.vscode,
-	},
-	-- no cond, allow to all platform
-	{
-		"noearc/jieba.nvim",
-		event = "VeryLazy",
-		dependencies = { "noearc/jieba-lua" },
 	},
 	-- yank between ssh session & local clipboard
 	{
@@ -40,5 +34,12 @@ return {
 				echo_hl = "Directory", -- highlight group of the OSC52 echo message
 			},
 		},
+	},
+	-- surround textObject
+	-- related key: sa/sd/sr/sf/sF/sh
+	{
+		"echasnovski/mini.surround",
+		event = "VeryLazy",
+		config = true,
 	},
 }

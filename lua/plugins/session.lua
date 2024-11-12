@@ -2,11 +2,24 @@
 return {
 	-- persistence, keep session
 	{
-		"folke/persistence.nvim",
+		"olimorris/persisted.nvim",
 		cond = not vim.g.vscode,
-		event = "BufReadPre", -- this will only start session saving when an actual file was opened
+		event = "BufReadPre",
+		lazy = false,
 		config = function()
-			require("persistence").setup()
+			require("persisted").setup({
+				autosave = true,
+				autoload = false,
+				should_autosave = function()
+					return true
+				end,
+				telescope = {
+					-- after delete session, reset prompl
+					reset_prompt_after_deletion = true,
+				},
+				follow_cwd = true,
+			})
+			require("telescope").load_extension("persisted")
 		end,
 	},
 }

@@ -1,11 +1,12 @@
 local wk = require("which-key")
+
 if vim.g.vscode then
 	-- https://github.com/vscode-neovim/vscode-multi-cursor.nvim?tab=readme-ov-file
 	local map = vim.keymap.set
 	local cursors = require("vscode-multi-cursor")
 	-- which key config was override by vscode (why??)
 	-- but I like this mapping, so keep it and use vim.keymap to map it
-	map("n", "<C-l>", "viwmc*<Cmd>nohl<CR>", { remap = true })
+	map("n", "<C-l>", "viwmc*<Cmd>nohl<CR>", { remap = true, desc = "Select Next Word" })
 	-- keep it, incase it's also override by vscode some days T^T
 	-- map({ "n", "x" }, "mc", cursors.create_cursor, { expr = true, desc = "Create cursor" })
 	-- map({ "n" }, "mcc", cursors.cancel, { desc = "Cancel/Clear all cursors" })
@@ -27,11 +28,8 @@ if vim.g.vscode then
 		},
 		{
 			mode = { "n" },
-			-- cancel cursor
 			{ "cc", cursors.cancel, { desc = "Cancel/Clear all cursors" } },
-			-- move prev
 			{ "mv", cursors.prev_cursor, { desc = "Goto prev cursor" } },
-			-- move next
 			{ "mn", cursors.next_cursor, { desc = "Goto next cursor" } },
 			-- not working T^T
 			-- { "<C-l>", "viwmc*<cmd>nohl<CR>", { remap = true } },
@@ -43,7 +41,7 @@ if vim.g.vscode then
 else
 	local neo_tree_command = require("neo-tree.command")
 	local conform = require("conform")
-	local persistence = require("persistence")
+	-- local persistence = require("persistence")
 	wk.add({
 		{
 			mode = { "n", "v" },
@@ -55,13 +53,6 @@ else
 				end,
 				desc = "Switch Neo Tree",
 			},
-			{
-				"<leader>be",
-				function()
-					neo_tree_command.execute({ source = "buffers", toggle = true })
-				end,
-				desc = "Switch Buffers",
-			},
 
 			-- telescope.nvim
 			{ "<C-p>", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
@@ -69,84 +60,42 @@ else
 			{ "<leader>fw", "<cmd> Telescope live_grep <CR>", desc = "Grep Word" },
 			{ "<leader>rs", "<cmd> Telescope resume <CR>", desc = "Resume Search" },
 			{ "<leader>fo", "<cmd> Telescope oldfiles <CR>", desc = "Old Files" },
-			{ "<leader>gs", "<CMD> Telescope git_status <CR>", desc = "Git Status" },
+			{ "<leader>fb", "<cmd> Telescope buffers <CR>", desc = "Buffers List" },
+			{ "<leader>gs", "<cmd> Telescope git_status <CR>", desc = "Git Status" },
 
 			-- bufferline.nvim mappings
+			-- Alt is main key
 			{ "<leader>bp", "<cmd> BufferLineTogglePin <CR>", desc = "Pin" },
 			{ "<leader>bo", "<cmd> BufferLineCloseOthers <CR>", desc = "Close Others" },
 			{ "<leader>br", "<cmd> BufferLineCloseRight <CR>", desc = "Close Right" },
 			{ "<leader>bl", "<cmd> BufferLineCloseLeft <CR>", desc = "Close Left" },
-			{ "<S-Tab>", "<cmd> BufferLineCyclePrev <CR>", desc = "Tab Prev" },
-			{ "<Tab>", "<cmd> BufferLineCycleNext <CR>", desc = "Tab Next" },
-			{ "<C-w>q", "<cmd> bd <CR>", desc = "Tab Close" },
+			{ "<A-o>", "<cmd> BufferLineCyclePrev <CR>", desc = "Tab Prev" },
+			{ "<A-i>", "<cmd> BufferLineCycleNext <CR>", desc = "Tab Next" },
+			{ "<A-q>", "<cmd> bd <CR>", desc = "Tab Close" },
+			{ "<A-1>", "<cmd>BufferLineGoToBuffer 1<CR>", desc = "Goto Buffer 1" },
+			{ "<A-2>", "<cmd>BufferLineGoToBuffer 2<CR>", desc = "Goto Buffer 2" },
+			{ "<A-3>", "<cmd>BufferLineGoToBuffer 3<CR>", desc = "Goto Buffer 3" },
+			{ "<A-4>", "<cmd>BufferLineGoToBuffer 4<CR>", desc = "Goto Buffer 4" },
+			{ "<A-5>", "<cmd>BufferLineGoToBuffer 5<CR>", desc = "Goto Buffer 5" },
+			{ "<A-6>", "<cmd>BufferLineGoToBuffer 6<CR>", desc = "Goto Buffer 6" },
+			{ "<A-7>", "<cmd>BufferLineGoToBuffer 7<CR>", desc = "Goto Buffer 7" },
+			{ "<A-8>", "<cmd>BufferLineGoToBuffer 8<CR>", desc = "Goto Buffer 8" },
+			{ "<A-9>", "<cmd>BufferLineGoToBuffer 9<CR>", desc = "Goto Buffer 9" },
 
 			-- conform.nvim: format files
 			{
-				"<leader>fm",
+				-- Shift-Alt-f
+				"<S-A-f>",
 				function()
 					conform.format({ async = true })
 				end,
 				desc = "Format",
 			},
-			-- persistence.nvim
-			-- restore session
-			{
-				"<leader>qs",
-				function()
-					persistence.load()
-				end,
-				desc = "Quick Session",
-			},
-			-- select session
-			{
-				"<leader>sl",
-				function()
-					persistence.select()
-				end,
-				desc = "Session Select",
-			},
-			-- restore last session
-			{
-				"<leader>ql",
-				function()
-					persistence.load({ last = true })
-				end,
-				desc = "Quick Last Session",
-			},
-			{
-				"<leader>ss",
-				function()
-					persistence.stop()
-				end,
-				desc = "Stop Record Session",
-			},
+			-- persisted.nvim
+			{ "<leader>fs", "<cmd> Telescope persisted <CR>", desc = "Find Session" },
+			{ "<leader>ss", "<cmd> SessionSave <CR>", desc = "Save Session" },
+			{ "<leader>sl", "<cmd> SessionLoad <CR>", desc = "Session Load" },
+			{ "<leader>sd", "<cmd> SessionDelete <CR>", desc = "Session Delete" },
 		},
 	})
 end
-
--- universal for all
-local jieba = require("jieba_nvim")
-wk.add({
-	mode = { "n", "v", "x" },
-	{
-		"ce",
-		function()
-			jieba.change_w()
-		end,
-		{ noremap = false, silent = true },
-	},
-	{
-		"de",
-		function()
-			jieba.delete_w()
-		end,
-		{ noremap = false, silent = true },
-	},
-	{
-		"vw",
-		function()
-			jieba.select_w()
-		end,
-		{ noremap = false, silent = true },
-	},
-})

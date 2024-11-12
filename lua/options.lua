@@ -8,17 +8,18 @@ vim.g.maplocalleader = "\\"
 local o = vim.o
 o.ignorecase = true
 o.smartcase = true
-o.fileformat = "unix"
+o.fileformats = "unix,mac,dos"
 
 o.laststatus = 3 -- global statusline
 o.showmode = false
 
 -- Indenting
 o.expandtab = true
-o.shiftwidth = 2
+o.shiftwidth = 4
+o.shiftround = true
 o.smartindent = true
-o.tabstop = 2
-o.softtabstop = 2
+o.smarttab = true
+o.tabstop = 4
 
 vim.opt.fillchars = { eob = " " }
 
@@ -39,9 +40,10 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 })
 
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
+-- MasonRestore for quick restore lsp
 vim.api.nvim_create_user_command("MasonRestore", function()
 	vim.cmd("MasonInstall lua-language-server stylua")
 	if not is_windows then
-		vim.cmd("MasonInstall gopls pyright gofumpt goimports")
+		vim.cmd("MasonInstall gopls gofumpt goimports")
 	end
 end, {})

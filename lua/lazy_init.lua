@@ -29,7 +29,7 @@ function LazyInit:lazy_conf()
 		-- install = { colorscheme = { "habamax" } },
 		-- git = { url_format = "git@github.com:%s.git" },
 		-- automatically check for plugin updates
-		checker = { enabled = true },
+		checker = { enabled = false },
 	}
 end
 
