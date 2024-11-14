@@ -34,7 +34,7 @@ copy & paste supported when use ssh connected to vms: [smartyank](https://github
 
 windows switch & buffer view: [bufferline](https://github.com/akinsho/bufferline.nvim)
 
-vscode like theme: [vscode](https://github.com/Mofiqul/vscode.nvim)
+theme: [catppuccin](https://github.com/catppuccin/nvim)
 
 file explorer: [neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)
 

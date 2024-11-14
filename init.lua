@@ -43,5 +43,5 @@ else
 		end,
 	})
 	-- colorscheme for neovim
-	vim.cmd.colorscheme("vscode")
+	vim.cmd.colorscheme("catppuccin")
 end

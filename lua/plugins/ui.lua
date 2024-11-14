@@ -1,11 +1,145 @@
 -- ui, including theme & scheme & tree
 
+-- set transparent backgroupd
+local transparent_background = Transparent_Background
 return {
 	-- theme and colorscheme
 	{
-		"Mofiqul/vscode.nvim",
+		"catppuccin/nvim",
 		cond = not vim.g.vscode,
 		lazy = true,
+		config = function()
+			require("catppuccin").setup({
+				transparent_background = transparent_background,
+				term_colors = true,
+				styles = {
+					comments = { "italic" },
+					functions = { "bold" },
+					keywords = { "italic" },
+					operators = { "bold" },
+					conditionals = { "bold" },
+					loops = { "bold" },
+					booleans = { "bold", "italic" },
+					numbers = {},
+					types = {},
+					strings = {},
+					variables = {},
+					properties = {},
+				},
+				-- enabled all plugins I used (and disabled not used)
+				integrations = {
+					treesitter = true,
+					native_lsp = {
+						enabled = true,
+						virtual_text = {
+							errors = { "italic" },
+							hints = { "italic" },
+							warnings = { "italic" },
+							information = { "italic" },
+						},
+						underlines = {
+							errors = { "underline" },
+							hints = { "underline" },
+							warnings = { "underline" },
+							information = { "underline" },
+						},
+					},
+					aerial = false,
+					alpha = false,
+					barbar = false,
+					beacon = false,
+					cmp = true,
+					coc_nvim = false,
+					dap = false,
+					dap_ui = false,
+					dashboard = false,
+					dropbar = { enabled = false, color_mode = false },
+					fern = false,
+					fidget = false,
+					flash = false,
+					gitgutter = false,
+					gitsigns = true,
+					harpoon = false,
+					headlines = false,
+					hop = false,
+					illuminate = false,
+					indent_blankline = { enabled = true, colored_indent_levels = false },
+					leap = false,
+					lightspeed = false,
+					lsp_saga = false,
+					lsp_trouble = false,
+					markdown = true,
+					mason = true,
+					mini = true,
+					navic = { enabled = false },
+					neogit = false,
+					neotest = false,
+					neotree = { enabled = true, show_root = true, transparent_panel = transparent_background },
+					noice = false,
+					notify = false,
+					nvimtree = false,
+					overseer = false,
+					pounce = false,
+					rainbow_delimiters = true,
+					sandwich = false,
+					semantic_tokens = true,
+					symbols_outline = false,
+					telekasten = false,
+					telescope = { enabled = true, style = "nvchad" },
+					treesitter_context = true,
+					ts_rainbow = false,
+					vim_sneak = false,
+					vimwiki = false,
+					which_key = true,
+				},
+				highlight_overrides = {
+					---@param cp palette
+					all = function(cp)
+						return {
+							-- For base configs
+							NormalFloat = { fg = cp.text, bg = transparent_background and cp.none or cp.mantle },
+							FloatBorder = {
+								fg = transparent_background and cp.blue or cp.mantle,
+								bg = transparent_background and cp.none or cp.mantle,
+							},
+							CursorLineNr = { fg = cp.green },
+
+							-- For native lsp configs
+							DiagnosticVirtualTextError = { bg = cp.none },
+							DiagnosticVirtualTextWarn = { bg = cp.none },
+							DiagnosticVirtualTextInfo = { bg = cp.none },
+							DiagnosticVirtualTextHint = { bg = cp.none },
+							LspInfoBorder = { link = "FloatBorder" },
+
+							-- For mason.nvim
+							MasonNormal = { link = "NormalFloat" },
+
+							-- For indent-blankline
+							IblIndent = { fg = cp.surface0 },
+							IblScope = { fg = cp.surface2, style = { "bold" } },
+
+							-- For nvim-cmp and wilder.nvim
+							Pmenu = { fg = cp.overlay2, bg = transparent_background and cp.none or cp.base },
+							PmenuBorder = { fg = cp.surface1, bg = transparent_background and cp.none or cp.base },
+							PmenuSel = { bg = cp.green, fg = cp.base },
+							CmpItemAbbr = { fg = cp.overlay2 },
+							CmpItemAbbrMatch = { fg = cp.blue, style = { "bold" } },
+							CmpDoc = { link = "NormalFloat" },
+							CmpDocBorder = {
+								fg = transparent_background and cp.surface1 or cp.mantle,
+								bg = transparent_background and cp.none or cp.mantle,
+							},
+
+							-- For telescope.nvim
+							TelescopeMatching = { fg = cp.lavender },
+							TelescopeResultsDiffAdd = { fg = cp.green },
+							TelescopeResultsDiffChange = { fg = cp.yellow },
+							TelescopeResultsDiffDelete = { fg = cp.red },
+						}
+					end,
+				},
+			})
+		end,
 	},
 	-- left tree in ui
 	-- COPYED from: https://www.lazyvim.org/plugins/editor
