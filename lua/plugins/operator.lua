@@ -11,7 +11,7 @@ return {
 		"ibhagwan/smartyank.nvim",
 		lazy = true,
 		event = "BufReadPost",
-		cond = vim.loop.os_uname().sysname ~= "Windows_NT",
+		cond = vim.g.vscode or vim.loop.os_uname().sysname ~= "Windows_NT",
 		opts = {
 			highlight = {
 				enabled = false, -- highlight yanked text
