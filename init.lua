@@ -10,9 +10,24 @@ lazy_init:lazy_load()
 require("lazy").setup("plugins", lazy_init:lazy_conf())
 require("keys")
 
+vim.api.nvim_create_augroup("numbertoggle", { clear = true })
 if vim.g.vscode then
 	-- extension for vscode
 	vim.g.clipboard = vim.g.vscode_clipboard
+	local vscode = require("vscode")
+	-- smart line number in vscode
+	vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+		group = "numbertoggle",
+		callback = function()
+			vscode.update_config("editor.lineNumbers", "on")
+		end,
+	})
+	vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+		group = "numbertoggle",
+		callback = function()
+			vscode.update_config("editor.lineNumbers", "relative")
+		end,
+	})
 else
 	-- extension for neovim
 	vim.o.clipboard = "unnamedplus"
@@ -24,7 +39,6 @@ else
 	-- when in N+V mode, show relative number
 	vim.wo.number = true
 	vim.wo.relativenumber = true
-	vim.api.nvim_create_augroup("numbertoggle", { clear = true })
 	vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
 		group = "numbertoggle",
 		callback = function()
