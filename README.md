@@ -1,6 +1,6 @@
 # nvim-config
 
-Lately I found vscode-vim is very slow during big page switches (over 3000 lines), so I tried vscode-neovim and it solve my problems, because technically vscode-vim is a vim simulator but vscode-neovim would try to interact with neovim process, that's the main difference, also, in neovim I can add a lot of custom configs to improve my coding experience and it seems great. Record here for what I've done with it.
+mainly use for: vscode-neovim + original neovim
 
 ## Plugins
 
