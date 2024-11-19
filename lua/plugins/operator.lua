@@ -13,6 +13,10 @@ return {
 		event = "BufReadPost",
 		cond = vim.g.vscode or vim.loop.os_uname().sysname ~= "Windows_NT",
 		opts = {
+			-- allow `y` and `d` for smart yank
+			validate_yank = function()
+				return vim.v.operator == "y" or vim.v.operator == "d"
+			end,
 			highlight = {
 				enabled = false, -- highlight yanked text
 				higroup = "IncSearch", -- highlight group of yanked text
