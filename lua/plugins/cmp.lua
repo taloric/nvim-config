@@ -125,6 +125,7 @@ return {
 	-- which key for key mapping looking
 	{
 		"folke/which-key.nvim",
-		lazy = false,
+		event = "VeryLazy",
+		cond = not vim.g.vscode,
 	},
 }

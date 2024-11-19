@@ -1,44 +1,41 @@
-local wk = require("which-key")
-
 if vim.g.vscode then
 	-- https://github.com/vscode-neovim/vscode-multi-cursor.nvim?tab=readme-ov-file
 	local map = vim.keymap.set
 	local cursors = require("vscode-multi-cursor")
-	-- which key config was override by vscode (why??)
-	-- but I like this mapping, so keep it and use vim.keymap to map it
+	-- directly use map instead of which-key in vscode to avoid load too muich plugins in vscode
 	map("n", "<C-l>", "viwmc*<Cmd>nohl<CR>", { remap = true, desc = "Select Next Word" })
-	-- keep it, incase it's also override by vscode some days T^T
-	-- map({ "n", "x" }, "mc", cursors.create_cursor, { expr = true, desc = "Create cursor" })
-	-- map({ "n" }, "mcc", cursors.cancel, { desc = "Cancel/Clear all cursors" })
-	-- map({ "n", "x" }, "mi", cursors.start_left, { desc = "Start cursors on the left" })
-	-- map({ "n", "x" }, "mI", cursors.start_left_edge, { desc = "Start cursors on the left edge" })
-	-- map({ "n", "x" }, "ma", cursors.start_right, { desc = "Start cursors on the right" })
-	-- map({ "n", "x" }, "mA", cursors.start_right, { desc = "Start cursors on the right" })
-	-- map({ "n" }, "mv", cursors.prev_cursor, { desc = "Goto prev cursor" })
-	-- map({ "n" }, "mn", cursors.next_cursor, { desc = "Goto next cursor" })
-	wk.add({
-		{
-			mode = { "n", "x", "v" },
-			{ "mc", cursors.create_cursor, { expr = true, desc = "Create cursor" } },
-			-- operators like I/A, it worked after multicursor select anything
-			{ "mi", cursors.start_left, { desc = "Start cursors on the left" } },
-			{ "mI", cursors.start_left_edge, { desc = "Start cursors on the left edge" } },
-			{ "ma", cursors.start_right, { desc = "Start cursors on the right" } },
-			{ "mA", cursors.start_right, { desc = "Start cursors on the right" } },
-		},
-		{
-			mode = { "n" },
-			{ "cc", cursors.cancel, { desc = "Cancel/Clear all cursors" } },
-			{ "mv", cursors.prev_cursor, { desc = "Goto prev cursor" } },
-			{ "mn", cursors.next_cursor, { desc = "Goto next cursor" } },
-			-- not working T^T
-			-- { "<C-l>", "viwmc*<cmd>nohl<CR>", { remap = true } },
-			-- keep it but I don't need flash right now
-			-- { "mcs", cursors.flash_char, { desc = "Create cursor using flash" } },
-			-- { "mcw", cursors.flash_word, { desc = "Create selection using flash" } },
-		},
-	})
+	map({ "n", "x", "v" }, "mc", cursors.create_cursor, { expr = true, desc = "Create cursor" })
+	map({ "n", "x", "v" }, "mi", cursors.start_left, { desc = "Start cursors on the left" })
+	map({ "n", "x", "v" }, "mI", cursors.start_left_edge, { desc = "Start cursors on the left edge" })
+	map({ "n", "x", "v" }, "ma", cursors.start_right, { desc = "Start cursors on the right" })
+	map({ "n", "x", "v" }, "mA", cursors.start_right, { desc = "Start cursors on the right" })
+	map({ "n" }, "cc", cursors.cancel, { desc = "Cancel/Clear all cursors" })
+	map({ "n" }, "mv", cursors.prev_cursor, { desc = "Goto prev cursor" })
+	map({ "n" }, "mn", cursors.next_cursor, { desc = "Goto next cursor" })
+	-- wk.add({
+	-- 	{
+	-- 		mode = { "n", "x", "v" },
+	-- 		{ "mc", cursors.create_cursor, { expr = true, desc = "Create cursor" } },
+	-- 		-- operators like I/A, it worked after multicursor select anything
+	-- 		{ "mi", cursors.start_left, { desc = "Start cursors on the left" } },
+	-- 		{ "mI", cursors.start_left_edge, { desc = "Start cursors on the left edge" } },
+	-- 		{ "ma", cursors.start_right, { desc = "Start cursors on the right" } },
+	-- 		{ "mA", cursors.start_right, { desc = "Start cursors on the right" } },
+	-- 	},
+	-- 	{
+	-- 		mode = { "n" },
+	-- 		{ "cc", cursors.cancel, { desc = "Cancel/Clear all cursors" } },
+	-- 		{ "mv", cursors.prev_cursor, { desc = "Goto prev cursor" } },
+	-- 		{ "mn", cursors.next_cursor, { desc = "Goto next cursor" } },
+	-- 		-- this one is not working
+	-- 		-- { "<C-l>", "viwmc*<cmd>nohl<CR>", { remap = true } },
+	-- 		-- keep it but I don't need flash right now
+	-- 		-- { "mcs", cursors.flash_char, { desc = "Create cursor using flash" } },
+	-- 		-- { "mcw", cursors.flash_word, { desc = "Create selection using flash" } },
+	-- 	},
+	-- })
 else
+	local wk = require("which-key")
 	local neo_tree_command = require("neo-tree.command")
 	local conform = require("conform")
 	-- local persistence = require("persistence")
