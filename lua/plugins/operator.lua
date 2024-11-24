@@ -46,4 +46,10 @@ return {
 		event = "VeryLazy",
 		config = true,
 	},
+	-- help f/F jump
+	{
+		"jinh0/eyeliner.nvim",
+		event = "VeryLazy",
+		config = true,
+	},
 }
