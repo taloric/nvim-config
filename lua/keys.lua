@@ -70,6 +70,8 @@ else
 			{ "<leader>bl", "<cmd> BufferLineCloseLeft <CR>", desc = "Close Left" },
 			{ "<A-o>", "<cmd> BufferLineCyclePrev <CR>", desc = "Tab Prev" },
 			{ "<A-i>", "<cmd> BufferLineCycleNext <CR>", desc = "Tab Next" },
+			{ "<A-PageUp>", "<cmd> BufferLineCyclePrev <CR>", desc = "Tab Prev" },
+			{ "<A-PageDown>", "<cmd> BufferLineCycleNext <CR>", desc = "Tab Next" },
 			{ "<A-q>", "<cmd> bd <CR>", desc = "Tab Close" },
 			{ "<A-1>", "<cmd>BufferLineGoToBuffer 1<CR>", desc = "Goto Buffer 1" },
 			{ "<A-2>", "<cmd>BufferLineGoToBuffer 2<CR>", desc = "Goto Buffer 2" },
