@@ -57,5 +57,6 @@ else
 		end,
 	})
 	-- colorscheme for neovim
-	vim.cmd.colorscheme("catppuccin")
+	-- vim.cmd.colorscheme("catppuccin")
+	vim.cmd.colorscheme("visual_studio_code")
 end

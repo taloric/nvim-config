@@ -5,7 +5,14 @@ local transparent_background = Transparent_Background
 return {
 	-- theme and colorscheme
 	{
+		"askfiy/visual_studio_code",
+		lazy = true,
+		cond = not vim.g.vscode,
+	},
+	{
 		"catppuccin/nvim",
+		-- disable, but maybe reuse it someday
+		enabled = false,
 		cond = not vim.g.vscode,
 		lazy = true,
 		config = function()
