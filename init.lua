@@ -82,8 +82,12 @@ else
 		end,
 	})
 	-- colorscheme for neovim
-	-- vim.cmd.colorscheme("catppuccin")
-	vim.cmd.colorscheme("visual_studio_code")
+	local themes = { "visual_studio_code", "catppuccin" }
+	local date = os.date("*t")
+	local day = date.day
+	local index = day % #themes
+	-- pick themes by date%len
+	vim.cmd("colorscheme " .. themes[index + 1]) -- Lua start index from 1
 end
 
 -- 自动触发处理函数

@@ -11,8 +11,6 @@ return {
 	},
 	{
 		"catppuccin/nvim",
-		-- disable, but maybe reuse it someday
-		enabled = false,
 		cond = not vim.g.vscode,
 		lazy = true,
 		config = function()
