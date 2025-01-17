@@ -82,7 +82,13 @@ else
 		end,
 	})
 	-- colorscheme for neovim
-	local themes = { "visual_studio_code", "catppuccin" }
+	local themes = {
+		"visual_studio_code",
+		"catppuccin",
+		"catppuccin-frappe",
+		"catppuccin-macchiato",
+		"catppuccin-mocha",
+	}
 	local date = os.date("*t")
 	local day = date.day
 	local index = day % #themes
