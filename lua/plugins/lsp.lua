@@ -41,10 +41,14 @@ return {
 			})
 
 			-- Set up lspconfig.
-			require("lspconfig").lua_ls.setup(require("plugins.lsp_custom.lua_ls"))
+			local lsp_config = require("lspconfig")
+			lsp_config.lua_ls.setup(require("plugins.lsp_custom.lua_ls"))
 
 			-- setup golang lsp
-			require("lspconfig").gopls.setup(require("plugins.lsp_custom.golang"))
+			lsp_config.gopls.setup(require("plugins.lsp_custom.golang"))
+
+			-- setup rust lsp
+			lsp_config.rust_analyzer.setup(require("plugins.lsp_custom.rust"))
 		end,
 	},
 	-- use conform instead of null-ls
@@ -126,6 +130,7 @@ return {
 				"gomod",
 				"query",
 				"regex",
+				"rust",
 				-- "toml",
 				-- "tsx",
 				-- "typescript",
