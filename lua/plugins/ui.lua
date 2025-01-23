@@ -266,6 +266,12 @@ return {
 	{
 		"echasnovski/mini.statusline",
 		cond = not vim.g.vscode,
+		init = function()
+			require("mini.statusline").section_location = function()
+				-- percentage/total/buffern
+				return "%p%%|%L|b%n"
+			end
+		end,
 		opts = {
 			set_vim_settings = false,
 		},
