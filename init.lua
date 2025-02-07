@@ -96,8 +96,15 @@ else
 	vim.cmd("colorscheme " .. themes[index + 1]) -- Lua start index from 1
 end
 
--- 自动触发处理函数
+-- 自动处理大文件，减少插件加载提升速度
 vim.api.nvim_create_autocmd("BufReadPre", {
 	callback = handle_large_size_file,
 	desc = "Optimize settings for large files",
+})
+
+-- 退出后恢复光标显示
+vim.api.nvim_create_autocmd("VimLeave", {
+	callback = function()
+		vim.opt.guicursor = "a:ver25-blinkon0"
+	end,
 })
