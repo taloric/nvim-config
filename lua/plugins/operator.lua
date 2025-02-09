@@ -52,4 +52,10 @@ return {
 		event = "VeryLazy",
 		config = true,
 	},
+	{
+		"noearc/jieba.nvim",
+		lazy = true,
+		dependencies = { "noearc/jieba-lua" },
+		opts = {},
+	},
 }
