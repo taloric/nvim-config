@@ -54,7 +54,6 @@ return {
 	},
 	{
 		"noearc/jieba.nvim",
-		lazy = true,
 		dependencies = { "noearc/jieba-lua" },
 		opts = {},
 	},
