@@ -4,6 +4,9 @@ return {
 	end,
 	settings = {
 		["rust-analyzer"] = {
+			check = {
+				command = "clippy",
+			},
 			imports = {
 				granularity = {
 					group = "module",
@@ -14,7 +17,10 @@ return {
 				buildScripts = {
 					enable = true,
 					rebuildOnSave = false,
+					useRustcWrapper = true,
 				},
+				allTargets = false,
+				target = "x86_64-unknown-linux-gnu",
 			},
 			procMacro = {
 				enable = true,
