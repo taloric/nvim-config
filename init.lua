@@ -39,20 +39,7 @@ vim.api.nvim_create_augroup("numbertoggle", { clear = true })
 if vim.g.vscode then
 	-- extension for vscode
 	vim.g.clipboard = vim.g.vscode_clipboard
-	local vscode = require("vscode")
 	-- smart line number in vscode
-	vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-		group = "numbertoggle",
-		callback = function()
-			vscode.update_config("editor.lineNumbers", "on")
-		end,
-	})
-	vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-		group = "numbertoggle",
-		callback = function()
-			vscode.update_config("editor.lineNumbers", "relative")
-		end,
-	})
 else
 	-- extension for neovim
 	vim.o.clipboard = "unnamedplus"
@@ -100,11 +87,4 @@ end
 vim.api.nvim_create_autocmd("BufReadPre", {
 	callback = handle_large_size_file,
 	desc = "Optimize settings for large files",
-})
-
--- 退出后恢复光标显示
-vim.api.nvim_create_autocmd("VimLeave", {
-	callback = function()
-		vim.opt.guicursor = "a:ver25-blinkon0"
-	end,
 })

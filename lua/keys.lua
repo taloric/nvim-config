@@ -83,16 +83,6 @@ else
 			{ "<A-8>", "<cmd>BufferLineGoToBuffer 8<CR>", desc = "Goto Buffer 8" },
 			{ "<A-9>", "<cmd>BufferLineGoToBuffer 9<CR>", desc = "Goto Buffer 9" },
 
-			-- conform.nvim: format files
-			{
-				-- Shift-Alt-f
-				"<S-A-f>",
-				function()
-					conform.format({ async = true })
-				end,
-				desc = "Format",
-			},
-			-- persisted.nvim
 			{ "<leader>fs", "<cmd> Telescope persisted <CR>", desc = "Find Session" },
 			{ "<leader>ss", "<cmd> SessionSave <CR>", desc = "Save Session" },
 			{ "<leader>sl", "<cmd> SessionLoad <CR>", desc = "Session Load" },
