@@ -31,7 +31,9 @@ return {
 		gopls = {
 			staticcheck = true,
 			semanticTokens = true,
-			noSemanticString = true,
+			semanticTokenTypes = {
+				string = false,
+			},
 			usePlaceholders = true,
 			completeUnimported = true,
 			symbolMatcher = "Fuzzy",
