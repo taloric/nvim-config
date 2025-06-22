@@ -2,6 +2,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		cond = not vim.g.vscode,
+		tag = "v1.8.0",
 		event = "VeryLazy",
 		dependencies = { "williamboman/mason-lspconfig.nvim" },
 		config = function()
@@ -47,7 +48,7 @@ return {
 			lsp_config.gopls.setup(require("plugins.lsp_custom.golang"))
 
 			-- setup rust lsp
-			lsp_config.rust_analyzer.setup(require("plugins.lsp_custom.rust"))
+			-- lsp_config.rust_analyzer.setup(require("plugins.lsp_custom.rust"))
 		end,
 	},
 	-- use conform instead of null-ls
@@ -199,4 +200,23 @@ return {
 			run_in_floaterm = false,
 		},
 	},
+	-- {
+	-- 	"Exafunction/windsurf.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"hrsh7th/nvim-cmp",
+	-- 	},
+	-- 	config = function()
+	-- 		require("codeium").setup({})
+	-- 	end,
+	-- },
+	-- {
+	-- 	"monkoose/neocodeium",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		local neocodeium = require("neocodeium")
+	-- 		neocodeium.setup()
+	-- 		vim.keymap.set("i", "<A-f>", neocodeium.accept)
+	-- 	end,
+	-- },
 }
