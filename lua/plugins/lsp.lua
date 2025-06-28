@@ -2,7 +2,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		cond = not vim.g.vscode,
-		tag = "v1.8.0",
 		event = "VeryLazy",
 		dependencies = { "williamboman/mason-lspconfig.nvim" },
 		config = function()
