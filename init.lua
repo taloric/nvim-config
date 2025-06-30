@@ -88,3 +88,5 @@ vim.api.nvim_create_autocmd("BufReadPre", {
 	callback = handle_large_size_file,
 	desc = "Optimize settings for large files",
 })
+
+vim.opt.iskeyword:append({ "-", "_" })

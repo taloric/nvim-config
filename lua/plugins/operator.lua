@@ -52,8 +52,10 @@ return {
 		event = "VeryLazy",
 		config = true,
 	},
+	-- 由于 jieba.nvim 会改变 w/e/b 的跳转顺序，仅对 windows 环境生效(仅用于写文档)
 	{
 		"noearc/jieba.nvim",
+		cond = not vim.g.vscode and vim.loop.os_uname().sysname == "Windows_NT",
 		dependencies = { "noearc/jieba-lua" },
 		opts = {},
 	},
