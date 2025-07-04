@@ -192,6 +192,8 @@ return {
 				filtered_items = {
 					visible = true,
 				},
+				group_empty_dirs = true,
+				scan_mode = "deep",
 			},
 			window = {
 				-- defaut width: 40
