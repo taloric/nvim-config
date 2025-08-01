@@ -19,6 +19,7 @@ return {
 					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
 					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 					--	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
@@ -47,7 +48,10 @@ return {
 			lsp_config.gopls.setup(require("plugins.lsp_custom.golang"))
 
 			-- setup rust lsp
-			-- lsp_config.rust_analyzer.setup(require("plugins.lsp_custom.rust"))
+			lsp_config.rust_analyzer.setup(require("plugins.lsp_custom.rust"))
+
+			-- setup python lsp
+			lsp_config.pyright.setup(require("plugins.lsp_custom.python"))
 		end,
 	},
 	-- use conform instead of null-ls
