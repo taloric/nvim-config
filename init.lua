@@ -70,7 +70,6 @@ else
 	})
 	-- colorscheme for neovim
 	local themes = {
-		"visual_studio_code",
 		"catppuccin",
 		"catppuccin-frappe",
 		"catppuccin-macchiato",
