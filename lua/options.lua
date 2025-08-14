@@ -22,6 +22,8 @@ o.smarttab = true
 o.tabstop = 4
 
 vim.opt.fillchars = { eob = " " }
+vim.opt.foldmethod = "manual"
+vim.opt.foldlevel = 99
 
 o.signcolumn = "yes"
 o.splitbelow = true
