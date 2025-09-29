@@ -1,7 +1,7 @@
 vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "H", "^", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "L", "g_", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "H", "^", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "L", "g_", { noremap = true, silent = true })
 if vim.g.vscode then
 	-- https://github.com/vscode-neovim/vscode-multi-cursor.nvim?tab=readme-ov-file
 	local map = vim.keymap.set
