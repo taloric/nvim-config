@@ -16,6 +16,19 @@ if vim.g.vscode then
 	map({ "n" }, "cc", cursors.cancel, { desc = "Cancel/Clear all cursors" })
 	map({ "n" }, "mv", cursors.prev_cursor, { desc = "Goto prev cursor" })
 	map({ "n" }, "mn", cursors.next_cursor, { desc = "Goto next cursor" })
+	-- normal 下在 vscode 做上下翻页(抽象实现，原因是只想在 normal 模式下做，毕竟 key=Shift-J/K)
+	map(
+		{ "n" },
+		"<C-j>",
+		"<cmd> lua require('vscode').action('workbench.action.previousEditor') <CR>",
+		{ desc = "Tab Prev" }
+	)
+	map(
+		{ "n" },
+		"<C-k>",
+		"<cmd> lua require('vscode').action('workbench.action.nextEditor') <CR>",
+		{ desc = "Tab Next" }
+	)
 	-- wk.add({
 	-- 	{
 	-- 		mode = { "n", "x", "v" },
@@ -70,8 +83,8 @@ else
 			{ "<leader>bo", "<cmd> BufferLineCloseOthers <CR>", desc = "Close Others" },
 			{ "<leader>br", "<cmd> BufferLineCloseRight <CR>", desc = "Close Right" },
 			{ "<leader>bl", "<cmd> BufferLineCloseLeft <CR>", desc = "Close Left" },
-			{ "<A-o>", "<cmd> BufferLineCyclePrev <CR>", desc = "Tab Prev" },
-			{ "<A-i>", "<cmd> BufferLineCycleNext <CR>", desc = "Tab Next" },
+			{ "<C-j>", "<cmd> BufferLineCyclePrev <CR>", desc = "Tab Prev" },
+			{ "<C-k>", "<cmd> BufferLineCycleNext <CR>", desc = "Tab Next" },
 			{ "<A-PageUp>", "<cmd> BufferLineCyclePrev <CR>", desc = "Tab Prev" },
 			{ "<A-PageDown>", "<cmd> BufferLineCycleNext <CR>", desc = "Tab Next" },
 			{ "<A-q>", "<cmd> bd <CR>", desc = "Tab Close" },
