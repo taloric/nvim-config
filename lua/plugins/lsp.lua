@@ -41,17 +41,24 @@ return {
 			})
 
 			-- Set up lspconfig.
-			local lsp_config = require("lspconfig")
-			lsp_config.lua_ls.setup(require("plugins.lsp_custom.lua_ls"))
+			-- local lsp_config = require("lspconfig")
+			vim.lsp.config("lua_ls", require("plugins.lsp_custom.lua_ls"))
+			-- vim.lsp.config.lua_ls.setup(require("plugins.lsp_custom.lua_ls"))
 
 			-- setup golang lsp
-			lsp_config.gopls.setup(require("plugins.lsp_custom.golang"))
+			vim.lsp.config("gopls", require("plugins.lsp_custom.golang"))
+			-- vim.lsp.config.gopls.setup(require("plugins.lsp_custom.golang"))
 
 			-- setup rust lsp
-			lsp_config.rust_analyzer.setup(require("plugins.lsp_custom.rust"))
+			vim.lsp.config("rust_analyzer", require("plugins.lsp_custom.rust"))
+			-- vim.lsp.config.rust_analyzer.setup(require("plugins.lsp_custom.rust"))
 
 			-- setup python lsp
-			lsp_config.pyright.setup(require("plugins.lsp_custom.python"))
+			vim.lsp.config("pyright", require("plugins.lsp_custom.python"))
+			-- vim.lsp.config.pyright.setup(require("plugins.lsp_custom.python"))
+
+			vim.lsp.config("markdown_oxide", {})
+			-- vim.lsp.config.markdown_oxide.setup({})
 		end,
 	},
 	-- use conform instead of null-ls
