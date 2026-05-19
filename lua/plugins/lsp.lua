@@ -96,39 +96,20 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		cond = not vim.g.vscode,
-		version = false, -- last release is way too old and doesn't work on Windows
+		branch = "main",
+		lazy = false, -- main 分支禁止 lazy-load
 		build = ":TSUpdate",
-		event = "VeryLazy",
-		lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-		init = function(plugin)
-			-- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
-			-- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-			-- no longer trigger the **nvim-treesitter** module to be loaded in time.
-			-- Luckily, the only things that those plugins need are the custom queries, which we make available
-			-- during startup.
-			require("lazy.core.loader").add_to_rtp(plugin)
-			require("nvim-treesitter.query_predicates")
-		end,
-		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-		-- NOTE: c-space conflict with IME switch, <bs> is useless (why not directly x?)
-		-- keys = {
-		-- 	{ "<c-space>", desc = "Increment Selection" },
-		-- 	{ "<bs>", desc = "Decrement Selection", mode = "x" },
-		-- },
-		opts_extend = { "ensure_installed" },
-		opts = {
-			highlight = { enable = true },
-			indent = { enable = true },
-			ensure_installed = {
-				-- 20241108: NOTE: remove unused language
+		cmd = { "TSUpdate", "TSInstall", "TSUpdateSync" },
+		config = function()
+			require("nvim-treesitter").setup({
+				install_dir = vim.fn.stdpath("data") .. "/site",
+			})
+
+			-- 取代旧的 ensure_installed
+			local parsers = {
 				"bash",
-				-- "c",
 				"diff",
-				-- "html",
-				-- "javascript",
-				-- "jsdoc",
 				"json",
-				-- "jsonc",
 				"lua",
 				"luadoc",
 				"luap",
@@ -141,47 +122,134 @@ return {
 				"query",
 				"regex",
 				"rust",
-				-- "toml",
-				-- "tsx",
-				-- "typescript",
 				"vim",
 				"vimdoc",
-				-- "xml",
 				"yaml",
-			},
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<bs>",
-				},
-			},
-			textobjects = {
+			}
+			require("nvim-treesitter").install(parsers)
+
+			-- 取代旧的 highlight.enable / indent.enable
+			-- 为所有安装了 parser 的 filetype 自动启动 highlight 和 indent
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function(args)
+					local buf = args.buf
+					local ft = vim.bo[buf].filetype
+					local lang = vim.treesitter.language.get_lang(ft)
+					if lang and vim.treesitter.language.add(lang) then
+						pcall(vim.treesitter.start, buf, lang)
+						vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+					end
+				end,
+			})
+
+			-- 取代旧的 incremental_selection（极简自实现版）
+			-- <C-space> 扩选到包含当前位置的最小 node；继续按则扩到父 node
+			-- <BS> 缩回上一级
+			local selection_stack = {}
+
+			local function start_or_grow()
+				local node
+				if vim.fn.mode() == "v" or vim.fn.mode() == "V" or vim.fn.mode() == "\22" then
+					-- 已经在 visual 模式，扩到 parent
+					local top = selection_stack[#selection_stack]
+					if top and top:parent() then
+						node = top:parent()
+					end
+				end
+				if not node then
+					node = vim.treesitter.get_node()
+				end
+				if not node then
+					return
+				end
+				table.insert(selection_stack, node)
+				local srow, scol, erow, ecol = node:range()
+				vim.api.nvim_win_set_cursor(0, { srow + 1, scol })
+				vim.cmd("normal! v")
+				vim.api.nvim_win_set_cursor(0, { erow + 1, math.max(ecol - 1, 0) })
+			end
+
+			local function shrink()
+				if #selection_stack <= 1 then
+					return
+				end
+				table.remove(selection_stack)
+				local node = selection_stack[#selection_stack]
+				local srow, scol, erow, ecol = node:range()
+				vim.api.nvim_win_set_cursor(0, { srow + 1, scol })
+				vim.cmd("normal! v")
+				vim.api.nvim_win_set_cursor(0, { erow + 1, math.max(ecol - 1, 0) })
+			end
+
+			vim.api.nvim_create_autocmd("ModeChanged", {
+				pattern = "[vV\22]*:[^vV\22]*",
+				callback = function()
+					selection_stack = {}
+				end,
+			})
+
+			vim.keymap.set({ "n", "x" }, "<C-space>", start_or_grow, { desc = "TS incremental select" })
+			vim.keymap.set("x", "<BS>", shrink, { desc = "TS shrink select" })
+		end,
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		cond = not vim.g.vscode,
+		branch = "main",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("nvim-treesitter-textobjects").setup({
 				move = {
-					enable = true,
-					goto_next_start = {
-						["]f"] = "@function.outer",
-						["]c"] = "@class.outer",
-						["]a"] = "@parameter.inner",
-					},
-					goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-					goto_previous_start = {
-						["[f"] = "@function.outer",
-						["[c"] = "@class.outer",
-						["[a"] = "@parameter.inner",
-					},
-					goto_previous_end = {
-						["[F"] = "@function.outer",
-						["[C"] = "@class.outer",
-						["[A"] = "@parameter.inner",
-					},
+					set_jumps = true,
 				},
-			},
-		},
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
+			})
+
+			local move = require("nvim-treesitter-textobjects.move")
+
+			-- goto_next_start
+			vim.keymap.set({ "n", "x", "o" }, "]f", function()
+				move.goto_next_start("@function.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "]c", function()
+				move.goto_next_start("@class.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "]a", function()
+				move.goto_next_start("@parameter.inner", "textobjects")
+			end)
+
+			-- goto_next_end
+			vim.keymap.set({ "n", "x", "o" }, "]F", function()
+				move.goto_next_end("@function.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "]C", function()
+				move.goto_next_end("@class.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "]A", function()
+				move.goto_next_end("@parameter.inner", "textobjects")
+			end)
+
+			-- goto_previous_start
+			vim.keymap.set({ "n", "x", "o" }, "[f", function()
+				move.goto_previous_start("@function.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "[c", function()
+				move.goto_previous_start("@class.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "[a", function()
+				move.goto_previous_start("@parameter.inner", "textobjects")
+			end)
+
+			-- goto_previous_end
+			vim.keymap.set({ "n", "x", "o" }, "[F", function()
+				move.goto_previous_end("@function.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "[C", function()
+				move.goto_previous_end("@class.outer", "textobjects")
+			end)
+			vim.keymap.set({ "n", "x", "o" }, "[A", function()
+				move.goto_previous_end("@parameter.inner", "textobjects")
+			end)
 		end,
 	},
 	{
