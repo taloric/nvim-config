@@ -69,10 +69,10 @@ else
 			end
 		end,
 	})
+    -- vim.cmd("colorscheme catppuccin-frappe")
 	-- colorscheme for neovim
 	local themes = {
 		"catppuccin",
-		"cyberdream",
 		"catppuccin-frappe",
 		"catppuccin-macchiato",
 		"catppuccin-mocha",

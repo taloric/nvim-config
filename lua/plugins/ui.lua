@@ -6,8 +6,10 @@ return {
 	-- theme and colorscheme
 	{
 		"catppuccin/nvim",
+        name = "catppuccin",
 		cond = not vim.g.vscode,
-		lazy = true,
+		lazy = false,
+		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
 				transparent_background = transparent_background,
@@ -140,12 +142,7 @@ return {
 				},
 			})
 		end,
-	},
-	{
-		"scottmckendry/cyberdream.nvim",
-		lazy = false,
-		priority = 1000,
-	},
+	},    
 	-- left tree in ui
 	-- COPYED from: https://www.lazyvim.org/plugins/editor
 	-- but delete keys and moved to mappings.lua

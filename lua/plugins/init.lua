@@ -1,6 +1,6 @@
 -- plugin spec: https://lazy.folke.io/spec
 
-Transparent_Background = false
+Transparent_Background = true
 return {
 	-- mason is an lsp/coding related manager
 	{
