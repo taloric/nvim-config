@@ -53,10 +53,19 @@ return {
 		config = true,
 	},
 	-- 由于 jieba.nvim 会改变 w/e/b 的跳转顺序，仅对 windows 环境生效(仅用于写文档)
+	-- {
+	-- 	"noearc/jieba.nvim",
+	--        -- cond = not vim.g.vscode and vim.loop.os_uname().sysname == "Windows_NT",
+	-- 	dependencies = { "noearc/jieba-lua" },
+	-- 	opts = {},
+	-- },
 	{
-		"noearc/jieba.nvim",
-		cond = not vim.g.vscode and vim.loop.os_uname().sysname == "Windows_NT",
-		dependencies = { "noearc/jieba-lua" },
-		opts = {},
+		"kkew3/jieba.vim",
+		branch = "release",
+		build = ":call jieba_vim#install()",
+		init = function()
+			vim.g.jieba_vim_lazy = 1
+			vim.g.jieba_vim_keymap = 1
+		end,
 	},
 }

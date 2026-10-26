@@ -5,7 +5,7 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cond = not vim.g.vscode,
 		cmd = "Telescope",
-		tag = "0.1.8",
+		tag = "v0.2.0",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
 			defaults = {
